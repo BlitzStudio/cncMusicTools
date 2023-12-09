@@ -5,10 +5,11 @@ DIR = "C:\\Users\\ionut\\Tools\\cncMusicTools\\music"
 # Locatia documentului cu linkurile
 DOC = "C:\\Users\\ionut\\Documents\\cr.docx"
 
-links, docLinks = getLinksFromDocx("C:\\Users\\ionut\\Documents\\cr.docx")
+links, docLinks = getLinksFromDocx(DOC)
 downloadCount = 1
 
-print("Done downloading:")
 for link in links:
-    download(link=link, path=DIR, downloadCount=downloadCount)
+    download(link=link, path=DIR)
     downloadCount += 1
+
+print(f"Done downloading: {downloadCount}")
