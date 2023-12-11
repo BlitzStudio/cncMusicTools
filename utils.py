@@ -1,7 +1,6 @@
 import json
 from docx import Document
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
-from pytube import YouTube
 import yt_dlp
 
 
@@ -38,16 +37,7 @@ def printComplete(stream, file):
     print(f"{stream.downloadCount}:{stream.title}")
 
 
-# descarca in format mp3 in folderul selectat precizat
-def downloadLegacy(link, path, downloadCount):
-    # de implementat cu YouTube.from_id()
-    # https://pytube.io/en/latest/api.html?highlight=on_complete#pytube.YouTube.from_id
-    video = YouTube(url=link, on_complete_callback=printComplete)
-    stream = video.streams.filter(only_audio=True).desc().first()
-    stream.downloadCount = downloadCount
-    stream.download(output_path=path, filename=f"{stream.title}.mp3", max_retries=3)
-
-
+# descarca in format mp3 linkul in folderul selectat precizat
 def download(link, path):
     ydl_opts = {
         "format": "bestaudio/best",
@@ -58,6 +48,7 @@ def download(link, path):
                 "preferredcodec": "mp3",
             }
         ],
+        "retries": 3,
         "outtmpl": f"{path}\\%(title)s.%(ext)s",
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ytdl:
