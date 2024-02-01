@@ -49,7 +49,7 @@ def download(link, path):
             }
         ],
         "retries": 3,
-        "outtmpl": f"{path}\\%(title)s.%(ext)s",
+        "outtmpl": f"{path}//%(title)s.%(ext)s",
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ytdl:
         ytdl.download(link)
